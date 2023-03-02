@@ -1,0 +1,291 @@
+import { ec as EC } from 'elliptic';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import './hazed-pane.css';
+
+import { faCopy, faSave } from '@fortawesome/free-regular-svg-icons';
+import {
+  faCheckCircle, faRotate
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { base58 } from 'ethers/lib/utils.js';
+import QRCode from 'react-qr-code';
+import { copyTextToClipboard } from '../utils/clipboard';
+import { calculateCrc } from '../utils/crc16';
+import { downloadTxtFile } from '../utils/download';
+import { useLocalStorage } from '../utils/localstorage';
+import { AddressContext, AddressContextType } from './address';
+import { FileUploader } from './upload';
+
+import chevronUp from '../chevron-up.svg';
+
+export function HazedID() {
+  const ec = new EC('secp256k1');
+
+  const { spendingKey, setSpendingKey } = useContext(
+    AddressContext
+  ) as AddressContextType;
+
+  const [metaAddr, setMetaAddr] = useState<string>();
+  const [copied, setCopied] = useState<boolean>(false);
+  const [opened, setOpened] = useState<boolean>(true);
+  const [loadError, setLoadError] = useState<boolean>(false);
+  const [loadSuccess, setLoadSuccess] = useState<boolean>(false);
+  const [hash] = useState<string>(window.location.hash);
+  const [keySaved, setKeySaved] = useState<boolean>(true);
+
+  useEffect(() => {
+    setOpened(hash.length < 20);
+  }, [hash]);
+
+  const [storedSpendingKey, setStoredSpendingKey] = useLocalStorage<
+    string | null
+  >('spendingKey', null);
+
+  const generateNewKey = () => {
+    const key = ec.genKeyPair();
+    setSpendingKey(key);
+    setStoredSpendingKey(key.getPrivate().toString(16));
+    setKeySaved(false);
+    setLoadError(false);
+  };
+
+  useEffect(() => {
+    let skey;
+
+    if (storedSpendingKey) {
+      try {
+        skey = ec.keyFromPrivate(storedSpendingKey, 'hex');
+        setSpendingKey(skey);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    if (!skey) {
+      generateNewKey();
+    }
+  }, [storedSpendingKey]);
+
+  useEffect(() => {
+    if (!spendingKey) return;
+
+    const data = Uint8Array.from(
+      spendingKey.getPublic().encodeCompressed('array')
+    );
+    const crc = calculateCrc(data);
+
+    const addr = new Uint8Array(data.length + 2);
+    addr.set(data);
+    addr.set(crc, data.length);
+
+    setMetaAddr('H' + base58.encode(addr));
+  }, [spendingKey]);
+
+  const handleFile = async (f: File) => {
+    if (!f) return;
+
+    if (f.size !== 64) {
+      setLoadError(true);
+      return;
+    }
+
+    try {
+      const key = await f.text();
+      const skey = ec.keyFromPrivate(key, 'hex');
+      setSpendingKey(skey);
+      setStoredSpendingKey(key);
+
+      setLoadSuccess(true);
+      setKeySaved(true);
+
+      setTimeout(() => {
+        setLoadSuccess(false);
+      }, 1500);
+    } catch (e) {
+      setLoadError(true);
+      console.log(e);
+    }
+  };
+
+  const handleCopy = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      copyTextToClipboard(metaAddr ? `https://hazed.io/#${metaAddr}` : '').then(
+        () => {
+          setCopied(true);
+          setTimeout(() => {
+            setCopied(false);
+          }, 1500);
+        }
+      );
+    },
+    [metaAddr]
+  );
+
+  const qrCode = metaAddr && (
+    <QRCode size={224} value={metaAddr} viewBox={`0 0 256 256`} />
+  );
+
+  return (
+    <div className="hazed-pane">
+      <div className="hazed-pane-header">
+        {opened ? (
+          <h1>Your Hazed ID</h1>
+        ) : (
+          <div className="hazed-pane-header" style={{ width: '90%' }}>
+            <div className="block-wide">
+              <p className="label" style={{ textTransform: 'uppercase' }}>
+                Your Hazed ID:
+              </p>
+              <p
+                className="label"
+                style={{ fontSize: '110%', lineHeight: '140%' }}
+              >
+                {metaAddr}
+              </p>
+            </div>
+
+            <button
+              title="Copy link"
+              className="hbutton hbutton-lnk"
+              onClick={handleCopy}
+            >
+              <span>
+                <FontAwesomeIcon icon={copied ? faCheckCircle : faCopy} /> COPY
+              </span>
+            </button>
+
+            {spendingKey && (
+              <button
+                className={keySaved ? 'hbutton hbutton-lnk' : 'hbutton'}
+                title="Save key"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  downloadTxtFile(
+                    spendingKey.getPrivate().toString(16),
+                    `Hazed_${metaAddr}.txt`
+                  )();
+                  setKeySaved(true);
+                }}
+              >
+                <span>
+                  <FontAwesomeIcon icon={faSave} /> SAVE KEY
+                </span>
+              </button>
+            )}
+          </div>
+        )}
+
+        <button
+          className={opened ? 'arrow' : 'arrow arrow-down'}
+          onClick={() => setOpened(!opened)}
+        >
+          <img src={chevronUp} alt="" />
+        </button>
+      </div>
+      <div
+        className="hazed-pane-body"
+        style={{ display: opened ? 'block' : 'none' }}
+      >
+        <div>
+          <p className="block">Share the Hazed ID to receive funds.</p>
+        </div>
+        <div className="hazed-pane-header buttons">
+          <div className="block-wide">
+            <p className="label" style={{ textTransform: 'uppercase' }}>
+              Hazed ID:
+            </p>
+            <p
+              className="label"
+              style={{ fontSize: '125%', lineHeight: '125%' }}
+            >
+              {metaAddr}
+            </p>
+          </div>
+          &nbsp;
+          <button
+            className="hbutton hbutton-lnk"
+            title="Copy link"
+            onClick={handleCopy}
+          >
+            <span>
+              <FontAwesomeIcon icon={copied ? faCheckCircle : faCopy} /> COPY
+            </span>
+          </button>
+          <button
+            className="hbutton hbutton-lnk"
+            title="Generate new"
+            onClick={generateNewKey}
+          >
+            <span>
+              <FontAwesomeIcon icon={faRotate} /> Generate New
+            </span>
+          </button>
+        </div>
+
+        <div className="line"></div>
+
+        <div className="hazed-pane-header block">
+          <div className="block-wide">
+            <p style={{ width: '85%' }}>
+              Once you shared your ID, you should <strong>save its key</strong>{' '}
+              to be able to withdraw funds from it. <strong>Never</strong> share
+              your key, only ID.
+            </p>
+          </div>
+
+          <FileUploader
+            preLoad={() => {
+              setLoadError(false);
+              setLoadSuccess(false);
+            }}
+            handleFile={handleFile}
+          />
+
+          {spendingKey && (
+            <button
+              className={keySaved ? 'hbutton hbutton-lnk' : 'hbutton'}
+              onClick={() => {
+                downloadTxtFile(
+                  spendingKey.getPrivate().toString(16),
+                  `Hazed_${metaAddr}.txt`
+                )();
+                setKeySaved(true);
+              }}
+              disabled={!spendingKey}
+            >
+              <span>
+                <FontAwesomeIcon icon={faSave} /> Save key
+              </span>
+            </button>
+          )}
+        </div>
+
+        <div
+          className="hazed-pane-header block"
+          style={{
+            width: '90%',
+            display: loadSuccess || loadError ? 'block' : 'none',
+          }}
+        >
+          <div
+            className="block-wide error-text"
+            style={{
+              display: loadError ? 'block' : 'none',
+            }}
+          >
+            Incorrect Hazed ID keyfile
+          </div>
+          <div
+            className="block-wide"
+            style={{
+              display: loadSuccess ? 'inline' : 'none',
+            }}
+          >
+            Keyfile loaded!
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

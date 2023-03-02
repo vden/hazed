@@ -1,0 +1,133 @@
+/***
+    The new CSS reset - version 1.8.3 (last updated 21.1.2023)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+
+/*
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+ */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+  all: unset;
+  display: revert;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a,
+button {
+  cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+  max-inline-size: 100%;
+  max-block-size: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+  border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input,
+textarea {
+  -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+  white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+  -webkit-appearance: revert;
+  appearance: revert;
+}
+
+/* preformatted text - use only for this feature */
+pre {
+  all: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+  color: unset;
+}
+
+/* remove default dot (•) sign */
+::marker {
+  content: initial;
+}
+
+/* fix the feature of 'hidden' attribute.
+   display:revert; revert to element instead of attribute */
+:where([hidden]) {
+  display: none;
+}
+
+/* revert for bug in Chromium browsers
+   - fix for the content editable attribute will work properly.
+   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
+:where([contenteditable]:not([contenteditable="false"])) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  -webkit-line-break: after-white-space;
+  -webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable="true"]) {
+  -webkit-user-drag: element;
+}
+
+/* Revert Modal native behavior */
+:where(dialog:modal) {
+  all: revert;
+}
+
+a {
+  text-decoration: none;
+}
+
+:root {
+  --cui-link-color: default;
+  --cui-link-hover-color: default;
+}
+
+.accordion {
+    --cui-accordion-bg: #080f27;
+    --cui-accordion-color: #d0d0d0;
+    --cui-accordion-active-bg: #0e1940;
+    --cui-accordion-active-color: white;
+    --cui-accordion-btn-color: white;
+    --cui-accordion-border-color: #444444;
+    --cui-accordion-btn-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cdefs%3E%3CclipPath%3E%3Cpath fill='%2300f' fill-opacity='.514' d='m-7 1024.36h34v34h-34z'/%3E%3C/clipPath%3E%3CclipPath%3E%3Cpath fill='%23aade87' fill-opacity='.472' d='m-6 1028.36h32v32h-32z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cpath d='m345.44 248.29l-194.29 194.28c-12.359 12.365-32.397 12.365-44.75 0-12.354-12.354-12.354-32.391 0-44.744l171.91-171.91-171.91-171.9c-12.354-12.359-12.354-32.394 0-44.748 12.354-12.359 32.391-12.359 44.75 0l194.29 194.28c6.177 6.18 9.262 14.271 9.262 22.366 0 8.099-3.091 16.196-9.267 22.373' transform='matrix(-.00013.03541.03541.00013 3.02 2.988)' fill='%23dddddd'/%3E%3C/svg%3E");
+    --cui-accordion-btn-active-icon: url("data:image/svg+xml,%3Csvg viewBox='0 0 22 22' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 15.223 11.809 L 8.343 18.689 C 7.905 19.127 7.196 19.127 6.758 18.689 C 6.321 18.251 6.321 17.542 6.758 17.104 L 12.846 11.017 L 6.758 4.93 C 6.321 4.492 6.321 3.783 6.758 3.345 C 7.196 2.908 7.905 2.908 8.343 3.345 L 15.223 10.225 C 15.442 10.444 15.551 10.73 15.551 11.017 C 15.551 11.304 15.441 11.59 15.223 11.809' fill='%23dddddd' transform='matrix(-0.003671, -0.999993, 0.999993, -0.003671, 0.013673, 22.048374) scale(-1,1) translate(-20, 0)'/%3E%3C/svg%3E");
+}
+
+.nav-pills {
+  --cui-nav-pills-link-active-bg: #0e1940;
+}
+
+.nav-tabs {
+  --cui-nav-tabs-link-active-bg: #0e1940;
+  --cui-nav-tabs-border-width: 0;
+  --cui-nav-tabs-link-active-color: white;
+}

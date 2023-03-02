@@ -1,0 +1,145 @@
+.hazed-pane {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 32px;
+  gap: 32px;
+
+  margin-top: 32px;
+
+  width: 960px;
+
+  /* gradient-base */
+
+  background: linear-gradient(90deg, rgba(25, 27, 39, 0) 0%, #191b27 100%);
+  /* shadow-right */
+
+  filter: drop-shadow(16px 0px 16px rgba(0, 0, 0, 0.24));
+  border-radius: 8px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 3;
+  align-self: stretch;
+  flex-grow: 0;
+  z-index: 3;
+}
+
+.hazed-pane-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+
+  width: 896px;
+  height: 48px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.hazed-pane-header h1 {
+  color: #78dcf0;
+}
+
+.hazed-pane-header .arrow {
+  position: absolute;
+  right: 48px;
+
+  cursor: pointer;
+}
+
+.hazed-pane-header .arrow-down {
+  transform: rotate(180deg);
+}
+
+.hazed-pane .block-wide {
+  border-left: 2px solid #78dcf0;
+  box-sizing: border-box;
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4px 0px 4px 16px;
+
+  width: 518px;
+  height: 48px;
+
+  /* accent */
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+}
+
+.hazed-pane-body {
+  width: 99%;
+}
+
+.hazed-pane button {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 32px;
+
+  margin-left: 0.5rem;
+
+  cursor: pointer;
+
+  /* height: 48px; */
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.label {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  /* identical to box height, or 133% */
+
+  display: flex;
+  align-items: center;
+
+  /* primary */
+
+  color: #e8e8e9;
+}
+
+.hazed-pane-body .block {
+  /* primary */
+
+  color: #e8e8e9;
+  margin: 0 0 1rem 0;
+}
+
+.hazed-pane .line {
+  width: 896px;
+  height: 0px;
+
+  margin: 2rem 0 2rem 0;
+
+  /* primary-20 */
+
+  border: 1px solid rgba(232, 232, 233, 0.2);
+}
+
+.hazed-pane .error-text {
+  color: #ff4f4f;
+  border-color: #ff4f4f;
+}
