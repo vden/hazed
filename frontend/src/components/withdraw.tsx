@@ -261,7 +261,7 @@ export function Withdraw() {
 
   if (!isConnected) {
     return (
-      <div>
+      <div className="lane">
         <p>
           <strong>
             Connect wallet <FontAwesomeIcon icon={faLink} />

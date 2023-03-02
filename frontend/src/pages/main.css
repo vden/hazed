@@ -243,6 +243,7 @@ p {
   padding: 12px;
   text-align: center;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .hbutton:disabled {
