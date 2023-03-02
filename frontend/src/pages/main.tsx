@@ -13,10 +13,10 @@ import { Network } from '../components/network';
 import { Send } from '../components/send';
 import { Withdraw } from '../components/withdraw';
 
-import LogoHover from '../logo-hover.svg';
-import Logo from '../logo.svg';
-import SendReceive from '../send-receive.svg';
-import Shield from '../shield.svg';
+import LogoHover from '../svg/logo-hover.svg';
+import Logo from '../svg/logo.svg';
+import SendReceive from '../svg/send-receive.svg';
+import Shield from '../svg/shield.svg';
 
 import { registryAddress } from '../utils/constants';
 
@@ -170,7 +170,7 @@ export function Main() {
               />
             </span>
           </a>
-          <a href="https://github.com/vden/hazed" style={{ flexGrow: 1 }}>
+          <a href="https://github.com/vden/hazed" style={{ flexGrow: 1 }} target="_blank" rel="noreferrer">
             <span>
               Github &nbsp;
               <FontAwesomeIcon icon={faGithub} />

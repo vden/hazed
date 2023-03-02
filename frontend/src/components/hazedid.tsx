@@ -16,7 +16,7 @@ import { useLocalStorage } from '../utils/localstorage';
 import { AddressContext, AddressContextType } from './address';
 import { FileUploader } from './upload';
 
-import chevronUp from '../chevron-up.svg';
+import chevronUp from '../svg/chevron-up.svg';
 
 export function HazedID() {
   const ec = new EC('secp256k1');
