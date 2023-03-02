@@ -32,6 +32,7 @@ export function Main() {
     <section className="layout">
       <div className="content">
         <div className="header-h">
+          <div className="header-item">
           <img className="logo logo-bg" src={LogoHover} alt="Hazed" />
           <img
             className="logo logo-default"
@@ -39,13 +40,10 @@ export function Main() {
             alt="Hazed"
             onClick={() => (document.location.href = '/')}
           />
-
-          <div className="marginLeft">
+        </div>
             <Connect />
-          </div>
-          <div>
+
             <Network />
-          </div>
         </div>
 
         <div className="promo large-block">

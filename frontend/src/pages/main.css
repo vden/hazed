@@ -97,6 +97,7 @@ p {
 
   position: absolute;
   left: 0;
+  top:0;
 
   cursor: pointer;
 
@@ -105,6 +106,25 @@ p {
   order: 0;
   flex-grow: 0;
   transition: opacity 1s;
+}
+
+.header-item {
+  display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 8px;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+
+.header-item:first-child {
+  flex-grow: 1;
 }
 
 .header-h .logo-default:hover {

@@ -1,13 +1,12 @@
-import { CDropdown, CDropdownItem, CDropdownMenu, CDropdownToggle } from '@coreui/react';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  useAccount, useNetwork, useSwitchNetwork
-} from 'wagmi';
+import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi';
+import chevronUp from '../svg/chevron-up.svg';
 import { networkIcons } from '../utils/constants';
+import './network.css';
 
 export function Network() {
-  const {isConnected } = useAccount();
+  const { isConnected } = useAccount();
   const { chain, chains } = useNetwork();
   const { switchNetwork } = useSwitchNetwork();
 
@@ -15,30 +14,39 @@ export function Network() {
     const icon = networkIcons[chain.id];
 
     return (
-      <div>
-        <CDropdown component="div" variant="nav-item">
-          <CDropdownToggle>
-            {icon && <img width="18" src={icon} alt={chain.name} />}{' '}
-            {chain.unsupported ? (<span><FontAwesomeIcon icon={faExclamationTriangle} /> Unsupported chain</span>) : chain.name}
-          </CDropdownToggle>
-          <CDropdownMenu>
-            {chains
+      <div className="header-item">
+        <div className="dropdown-head">
+          {icon && <img width="18" src={icon} alt={chain.name} />}{' '}
+          {chain.unsupported ? (
+            <span>
+              <FontAwesomeIcon icon={faExclamationTriangle} /> Unsupported chain
+            </span>
+          ) : (
+            <p>{chain.name}</p>
+          )}
+          <button className="arrow arrow-down">
+            <img src={chevronUp} alt="" />
+          </button>
+        </div>
+        <div className="dropdown-body">
+          {chains
             .filter((chain) => [250, 4002].indexOf(chain.id) >= 0)
             .map((chain) => (
-              <CDropdownItem key={chain.id}
-                size={8}
-                component="button"
+              <button
+                className="hbutton hbutton-lnk"
+                style={{ paddingLeft: 0, textTransform: 'none' }}
+                key={chain.id}
                 onClick={() => switchNetwork(chain.id)}
               >
-                <img width="18" src={networkIcons[chain.id]} alt={chain.name} />&nbsp;
+                <img width="18" src={networkIcons[chain.id]} alt={chain.name} />
+                &nbsp;
                 {chain.name}
-              </CDropdownItem>
+              </button>
             ))}
-          </CDropdownMenu>
-        </CDropdown>
+        </div>
       </div>
     );
   }
 
-  return <></>
+  return <></>;
 }

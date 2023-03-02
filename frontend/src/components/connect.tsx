@@ -31,8 +31,7 @@ export function Connect() {
 
   if (isConnected) {
     return (
-      <div>
-        <div>
+        <div className="header-item">
           <div className="dropdown-head">
             <span>
               <FontAwesomeIcon icon={faWallet} />
@@ -67,7 +66,6 @@ export function Connect() {
             </button>
           </div>
         </div>
-      </div>
     );
   }
 
