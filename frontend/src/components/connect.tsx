@@ -10,6 +10,9 @@ import {
 import "./network.css";
 
 import chevronUp from '../svg/chevron-up.svg';
+import metamaskLogo from '../svg/metamask.svg';
+import walletConnectLogo from '../svg/walletconnect.svg';
+
 import { formatEtherTruncated } from '../utils/format';
 
 
@@ -23,7 +26,7 @@ export function Connect() {
   const { chain } = useNetwork();
   const { disconnect } = useDisconnect();
 
-  const [ metamask ] = connectors;
+  const [ metamask, walletConnect ] = connectors;
 
   const shortAddress = address
     ? `${address.substring(0, 6)}…${address.substring(address.length - 4)}`
@@ -70,23 +73,50 @@ export function Connect() {
   }
 
   return (
-    <div>
-      <button
-        className="hbutton hbutton-lnk"
-        disabled={!metamask.ready}
-        key={metamask.id}
-        style={{textTransform: "none"}}
-        onClick={() => connect({ connector: metamask })}
-      >
+    <div className="header-item">
+      <div className="dropdown-head">
         <span>
           Connect wallet&nbsp;
           <FontAwesomeIcon icon={faLink} />
-          {!metamask.ready && ' (unsupported)'}
-          {isLoading && metamask.id === pendingConnector?.id && ' (connecting)'}
         </span>
-      </button>
+      </div>
+      <div className="dropdown-body">
+        <button
+          className="hbutton hbutton-lnk"
+          disabled={!metamask.ready}
+          key={metamask.id}
+          style={{ textTransform: 'none' }}
+          onClick={() => connect({ connector: metamask })}
+        >
+          <img src={metamaskLogo} alt="" width={24} />
+          <span>
+            Metamask
+            {!metamask.ready && ' (unsupported)'}
+            {isLoading &&
+              metamask.id === pendingConnector?.id &&
+              ' (connecting)'}
+          </span>
+        </button>
 
-      {error && <div>{error.message}</div>}
+        <button
+          className="hbutton hbutton-lnk"
+          disabled={!walletConnect.ready}
+          key={walletConnect.id}
+          style={{ textTransform: 'none' }}
+          onClick={() => connect({ connector: walletConnect })}
+        >
+          <img src={walletConnectLogo} alt="" width={24} />
+          <span>
+            Wallet Connect
+            {!walletConnect.ready && ' (unsupported)'}
+            {isLoading &&
+              walletConnect.id === pendingConnector?.id &&
+              ' (connecting)'}
+          </span>
+        </button>
+
+        {error && <p className="message error">{error.message}</p>}
+      </div>
     </div>
   );
 }

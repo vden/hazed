@@ -9,6 +9,8 @@ import { fantom, fantomTestnet, localhost } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+
 const { chains, provider, webSocketProvider } = configureChains(
   [fantom, fantomTestnet, mainnet, goerli, localhost],
   [publicProvider()]
@@ -17,6 +19,11 @@ const client = createClient({
   autoConnect: true,
   connectors: [
     new MetaMaskConnector({ chains }),
+    new WalletConnectConnector({ chains, options: {
+    qrcode: true,
+    // version: '1',
+    //  projectId: process.env.REACT_APP_WALLET_CONNECT_ID || ''
+    }}),
     /* new InjectedConnector({
       chains,
       options: {
@@ -28,6 +35,8 @@ const client = createClient({
   provider,
   webSocketProvider,
 });
+
+window.Buffer = window.Buffer || require('buffer').Buffer;
 
 function App() {
   return (
