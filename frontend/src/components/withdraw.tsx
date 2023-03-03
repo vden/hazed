@@ -232,6 +232,7 @@ export function Withdraw() {
         from: addr,
         type: 1,
         value: originalBalance.sub(fee),
+        gasPrice: gasPrice
       };
 
       console.log(

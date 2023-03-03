@@ -9,6 +9,7 @@ import './tasks/deploy';
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "";
+const FTM_API_KEY = process.env.FTM_API_KEY || "";
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -21,13 +22,13 @@ const config: HardhatUserConfig = {
     }
   },
   networks: {
-    mainnet: {
+    opera: {
       url: `https://rpcapi.fantom.network`,
       chainId: 250,
       accounts: [`0x${PRIVATE_KEY}`]
     },
-    testnet: {
-      url: `https://rpc.testnet.fantom.network`,
+    ftmTestnet: {
+      url: `https://fantom-testnet.public.blastapi.io/`,
       chainId: 4002,
       accounts: [`0x${PRIVATE_KEY}`]
     },
@@ -59,8 +60,8 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      ftmTestnet: ETHERSCAN_API_KEY,
-      opera: ETHERSCAN_API_KEY,
+      ftmTestnet: FTM_API_KEY,
+      opera: FTM_API_KEY,
       goerli: ETHERSCAN_API_KEY
     }
   }
