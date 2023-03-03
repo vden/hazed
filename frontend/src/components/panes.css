@@ -95,6 +95,8 @@
   flex-grow: 0;
 
   display: block;
+
+  max-width: 800px;
 }
 
 .pane strong {

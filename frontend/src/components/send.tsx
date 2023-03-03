@@ -284,8 +284,10 @@ export function Send() {
               <p className="message">
                 <strong>Successfully sent!</strong>&nbsp;
                 <a
-                  href={`https://ftmscan.io/tx/${data?.hash}`}
+                  href={`https://ftmscan.com/tx/${data?.hash}`}
                   className="link-text"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   View on FTMScan{' '}
                   <FontAwesomeIcon

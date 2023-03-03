@@ -90,8 +90,7 @@ export function Connect() {
         >
           <img src={metamaskLogo} alt="" width={24} />
           <span>
-            Metamask
-            {!metamask.ready && ' (unsupported)'}
+            MetaMask
             {isLoading &&
               metamask.id === pendingConnector?.id &&
               ' (connecting)'}
@@ -108,7 +107,6 @@ export function Connect() {
           <img src={walletConnectLogo} alt="" width={24} />
           <span>
             Wallet Connect
-            {!walletConnect.ready && ' (unsupported)'}
             {isLoading &&
               walletConnect.id === pendingConnector?.id &&
               ' (connecting)'}
