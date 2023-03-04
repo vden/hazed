@@ -128,24 +128,36 @@ export function HazedID() {
       <div className="hazed-pane-header">
         {opened ? (
           <div className="hazed-pane-header">
-          <div className="header-item"><h1>Your Hazed ID</h1></div>
-           <button
-            className={opened ? 'arrow' : 'arrow arrow-down'}
-            onClick={() => setOpened(!opened)}
-          >
-            <img src={chevronUp} alt="" width={24} />
-          </button>
+            <div className="header-item" style={{ alignItems: 'center' }}>
+              <div className="header-item header-title">
+                <h1>Your Hazed ID</h1>
+              </div>
+              <button
+                className={opened ? 'arrow' : 'arrow arrow-down'}
+                onClick={() => setOpened(!opened)}
+              >
+                <img src={chevronUp} alt="" width={24} />
+              </button>
+            </div>
           </div>
         ) : (
           <div className="hazed-pane-header">
-            <div className="block-wide">
-              <p className="label" style={{ textTransform: 'uppercase' }}>
-                Your Hazed ID:
-              </p>
-              <p className="label hazed-id-contracted">{metaAddr}</p>
+            <div className="header-item" style={{ alignItems: 'center' }}>
+              <div className="block-wide">
+                <p className="label" style={{ textTransform: 'uppercase' }}>
+                  Your Hazed ID:
+                </p>
+                <p className="label hazed-id-contracted">{metaAddr}</p>
+              </div>
+              <button
+                className={opened ? 'arrow mobile' : 'arrow arrow-down mobile'}
+                onClick={() => setOpened(!opened)}
+              >
+                <img src={chevronUp} alt="" width={24} />
+              </button>
             </div>
 
-            <div className="header-item">
+            <div className="header-item" style={{ alignItems: 'center' }}>
               <button
                 title="Copy link"
                 className="hbutton hbutton-lnk"
@@ -176,13 +188,15 @@ export function HazedID() {
                 </button>
               )}
 
-                      <button
-            className={opened ? 'arrow' : 'arrow arrow-down'}
-            onClick={() => setOpened(!opened)}
-          >
-            <img src={chevronUp} alt="" width={24} />
-          </button>
-          </div>
+              <button
+                className={
+                  opened ? 'arrow no-mobile' : 'arrow arrow-down no-mobile'
+                }
+                onClick={() => setOpened(!opened)}
+              >
+                <img src={chevronUp} alt="" width={24} />
+              </button>
+            </div>
           </div>
         )}
       </div>
