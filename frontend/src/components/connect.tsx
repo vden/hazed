@@ -18,7 +18,7 @@ import { formatEtherTruncated } from '../utils/format';
 
 export function Connect() {
   const { address, isConnected } = useAccount();
-  const { data: balance } = useBalance({ address });
+  const { data: balance } = useBalance({ address, watch: true, cacheTime: 3_500 });
   // const { data: ensAvatar } = useEnsAvatar({ address, chainId: 1 });
   // const { data: ensName } = useEnsName({ address, chainId: 1 });
   const { connect, connectors, error, isLoading, pendingConnector } =

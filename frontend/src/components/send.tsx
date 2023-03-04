@@ -13,7 +13,7 @@ import {
   useContractWrite,
   useNetwork,
   usePrepareContractWrite,
-  useWaitForTransaction,
+  useWaitForTransaction
 } from 'wagmi';
 import { default as REGISTRY_ABI } from '../contracts/Registry.sol/Registry.json';
 import { registryAddress } from '../utils/constants';
@@ -29,7 +29,11 @@ export function Send() {
   }, []);
 
   const { address, isConnected } = useAccount();
-  const { data: balance } = useBalance({ address });
+  const { data: balance } = useBalance({
+    address,
+    watch: true,
+    cacheTime: 3_500,
+  });
   const { chain } = useNetwork();
 
   const [fantomAddr, setFantomAddr] = useState<string>(
