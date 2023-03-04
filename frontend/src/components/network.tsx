@@ -19,7 +19,7 @@ export function Network() {
           {icon && <img width="18" src={icon} alt={chain.name} />}{' '}
           {chain.unsupported ? (
             <span>
-              <FontAwesomeIcon icon={faExclamationTriangle} /> Unsupported chain
+              <FontAwesomeIcon icon={faExclamationTriangle} /> Unsupported
             </span>
           ) : (
             <p>{chain.name}</p>
