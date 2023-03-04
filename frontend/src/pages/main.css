@@ -26,7 +26,8 @@ html {
   margin: 48px auto 0;
 }
 
-strong {
+strong,
+b {
   font-weight: bold;
 }
 

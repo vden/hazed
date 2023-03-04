@@ -73,7 +73,7 @@ export function Connect() {
   return (
     <div className="header-item" id="connect-menu">
       <div className="dropdown-head">
-        <span>
+        <span className="link">
           Connect wallet&nbsp;
           <FontAwesomeIcon icon={faLink} />
         </span>

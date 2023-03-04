@@ -7,8 +7,7 @@ import {
   faArrowRight,
   faArrowTurnDown,
   faCheckCircle,
-  faCopy,
-  faLink
+  faCopy
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -265,13 +264,13 @@ export function Withdraw() {
     return (
       <div className="lane">
         <p>
-          <strong
+          <b
             onClick={() => {
               window.scrollTo({ top: 0 });
             }}
           >
-            Connect wallet <FontAwesomeIcon icon={faLink} />
-          </strong>{' '}
+            Connect wallet
+          </b>{' '}
           to proceed.
         </p>
       </div>

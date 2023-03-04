@@ -3,7 +3,7 @@ import './panes.css';
 
 import { curve, ec as EC } from 'elliptic';
 
-import { faArrowRight, faLink } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { BigNumber, ethers } from 'ethers';
 import { base58, getAddress, keccak256, parseEther } from 'ethers/lib/utils.js';
@@ -13,7 +13,7 @@ import {
   useContractWrite,
   useNetwork,
   usePrepareContractWrite,
-  useWaitForTransaction,
+  useWaitForTransaction
 } from 'wagmi';
 import { default as REGISTRY_ABI } from '../contracts/Registry.sol/Registry.json';
 import { registryAddress } from '../utils/constants';
@@ -211,13 +211,13 @@ export function Send() {
 
       {!isConnected && (
         <p style={{ marginTop: '1.75rem' }}>
-          <strong
+          <b
             onClick={() => {
               window.scrollTo({ top: 0 });
             }}
           >
-            Connect wallet <FontAwesomeIcon icon={faLink} />
-          </strong>{' '}
+            Connect wallet
+          </b>{' '}
           to proceed.
         </p>
       )}
