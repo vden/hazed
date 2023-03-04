@@ -4,17 +4,17 @@ import {
   useAccount,
   useBalance,
   useConnect,
-  useDisconnect, useNetwork
+  useDisconnect,
+  useNetwork
 } from 'wagmi';
 
-import "./network.css";
+import './network.css';
 
 import chevronUp from '../svg/chevron-up.svg';
 import metamaskLogo from '../svg/metamask.svg';
 import walletConnectLogo from '../svg/walletconnect.svg';
 
 import { formatEtherTruncated } from '../utils/format';
-
 
 export function Connect() {
   const { address, isConnected } = useAccount();
@@ -26,7 +26,7 @@ export function Connect() {
   const { chain } = useNetwork();
   const { disconnect } = useDisconnect();
 
-  const [ metamask, walletConnect ] = connectors;
+  const [metamask, walletConnect] = connectors;
 
   const shortAddress = address
     ? `${address.substring(0, 6)}…${address.substring(address.length - 4)}`
@@ -34,46 +34,44 @@ export function Connect() {
 
   if (isConnected) {
     return (
-        <div className="header-item">
-          <div className="dropdown-head">
-            <span>
-              <FontAwesomeIcon icon={faWallet} />
-              &nbsp;
-              {shortAddress}
-            </span>
-            <button className="arrow arrow-down">
-              <img src={chevronUp} alt="" />
-            </button>
-          </div>
-          <div className="dropdown-body">
-            <a
-              href={`https://ftmscan.com/address/${address}`}
-              target="_blank"
-              rel="noreferrer"
-              className="text"
-            >
-              {balance
-                ? `${formatEtherTruncated(balance?.value)} ${
-                    chain?.nativeCurrency.symbol
-                  }`
-                : '...'}
-            </a>
-            <button
-              className="hbutton hbutton-lnk"
-              style={{ paddingLeft: 0, textTransform: 'none' }}
-              onClick={() => disconnect()}
-            >
-              <span>
-                Disconnect
-              </span>
-            </button>
-          </div>
+      <div className="header-item">
+        <div className="dropdown-head">
+          <span>
+            <FontAwesomeIcon icon={faWallet} />
+            &nbsp;
+            {shortAddress}
+          </span>
+          <button className="arrow arrow-down">
+            <img src={chevronUp} alt="" />
+          </button>
         </div>
+        <div className="dropdown-body">
+          <a
+            href={`https://ftmscan.com/address/${address}`}
+            target="_blank"
+            rel="noreferrer"
+            className="text"
+          >
+            {balance
+              ? `${formatEtherTruncated(balance?.value)} ${
+                  chain?.nativeCurrency.symbol
+                }`
+              : '...'}
+          </a>
+          <button
+            className="hbutton hbutton-lnk"
+            style={{ paddingLeft: 0, textTransform: 'none' }}
+            onClick={() => disconnect()}
+          >
+            <span>Disconnect</span>
+          </button>
+        </div>
+      </div>
     );
   }
 
   return (
-    <div className="header-item">
+    <div className="header-item" id="connect-menu">
       <div className="dropdown-head">
         <span>
           Connect wallet&nbsp;

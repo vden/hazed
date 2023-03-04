@@ -1,3 +1,7 @@
+html {
+  background-color: #10121f;
+}
+
 .layout {
   min-height: 100vh;
   /* screen 1280 - content 960 */
@@ -19,7 +23,7 @@
 .content {
   position: relative;
   width: 960px;
-  margin: 48px auto;
+  margin: 48px auto 0;
 }
 
 strong {
@@ -77,12 +81,12 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 0px;
   gap: 48px;
 
   width: 960px;
-  height: 32px;
+  min-height: 32px;
   /* Inside auto layout */
 
   flex: none;
@@ -97,7 +101,7 @@ p {
 
   position: absolute;
   left: 0;
-  top:0;
+  top: 0;
 
   cursor: pointer;
 
@@ -110,26 +114,25 @@ p {
 
 .header-item {
   display: flex;
-flex-direction: row;
-align-items: flex-start;
-padding: 0px;
-gap: 8px;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+  margin-right: 24px;
 
+  /* Inside auto layout */
 
-/* Inside auto layout */
-
-flex: none;
-order: 0;
-flex-grow: 0;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 }
 
 .header-item:first-child {
   flex-grow: 1;
 }
 
-.header-h .logo-default:hover {
-  opacity: 0;
-  transition: opacity 1s;
+.header-item:last-child {
+  margin-right: 0;
 }
 
 .header li {
@@ -201,7 +204,7 @@ flex-grow: 0;
   gap: 32px;
 
   width: 896px;
-  height: 48px;
+  min-height: 48px;
 
   /* Inside auto layout */
 
@@ -264,15 +267,12 @@ flex-grow: 0;
   text-align: center;
   text-transform: uppercase;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .hbutton:disabled {
   opacity: 0.4;
   cursor: default;
-}
-
-.hbutton:hover:disabled {
-  background: #78dcf0;
 }
 
 .hbutton-lnk {
@@ -281,15 +281,6 @@ flex-grow: 0;
   /* accent */
 
   color: #78dcf0;
-}
-
-.hbutton:hover {
-  background: #e8e8e9;
-}
-
-.hbutton-lnk:hover {
-  color: #e8e8e9 !important;
-  background: none;
 }
 
 .hbutton:active {
@@ -349,19 +340,6 @@ flex-grow: 0;
   flex-grow: 0;
 }
 
-.nav-tabs .tab:hover {
-  border-color: #e8e8e9 !important;
-  opacity: 0.8;
-}
-
-.nav-tabs .tab:hover h2 {
-  color: #e8e8e9 !important;
-}
-
-.nav-tabs .tab:hover .super {
-  color: #e8e8e9 !important;
-}
-
 .nav-tabs .active {
   border-bottom: 2px solid #78dcf0;
   color: #78dcf0 !important;
@@ -389,7 +367,7 @@ flex-grow: 0;
   gap: 48px;
 
   width: 960px;
-  height: 24px;
+  min-height: 24px;
 
   border-radius: 8px;
 
@@ -414,7 +392,13 @@ flex-grow: 0;
   gap: 8px;
 
   min-width: 100px;
-  height: 24px;
+  min-height: 24px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
 
   /* Inside auto layout */
 
@@ -423,10 +407,6 @@ flex-grow: 0;
   flex-grow: 0;
 
   color: #78dcf0;
-}
-
-.footer a:hover {
-  color: #e8e8e9;
 }
 
 .footer a:active {
@@ -451,4 +431,119 @@ flex-grow: 0;
   flex-grow: 0;
 
   color: rgba(232, 232, 233, 0.2);
+}
+
+@media (hover: hover) {
+  .footer a:hover {
+    color: #e8e8e9;
+  }
+
+  .nav-tabs .tab:hover {
+    border-color: #e8e8e9 !important;
+    opacity: 0.8;
+  }
+
+  .nav-tabs .tab:hover h2 {
+    color: #e8e8e9 !important;
+  }
+
+  .nav-tabs .tab:hover .super {
+    color: #e8e8e9 !important;
+  }
+
+  .hbutton:hover {
+    background: #e8e8e9;
+  }
+
+  .hbutton-lnk:hover {
+    color: #e8e8e9 !important;
+    background: none;
+  }
+
+  .header-h .logo-default:hover {
+    opacity: 0;
+    transition: opacity 1s;
+  }
+
+  .hbutton:hover:disabled {
+    background: #78dcf0;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .header-h .logo-bg {
+    display: none;
+  }
+
+  .content {
+    width: 360px !important;
+    padding: 0px !important;
+  }
+
+  .layout {
+    padding: 0px 0px 32px !important;
+  }
+
+  .header-h {
+    width: 360px !important;
+    padding-left: 4px !important;
+    flex-direction: column !important;
+  }
+
+  .header-h .logo {
+    left: 4px !important;
+  }
+
+  .large-block {
+    width: auto !important;
+    flex-direction: column !important;
+    padding: 16px !important;
+    margin-left: -12px;
+    gap: 12px !important;
+  }
+
+  .promo .benefits {
+    width: 348px !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .promo .benefits .item {
+    width: 348px !important;
+  }
+
+  h1 {
+    font-size: 24px !important;
+    line-height: 32px !important;
+  }
+
+  .footer {
+    width: 360px !important;
+    flex-direction: column !important;
+    padding-left: 4px !important;
+  }
+
+  .nav-tabs {
+    overflow-x: scroll;
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .nav-tabs::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+
+  .hbutton {
+    padding: 8px;
+  }
+
+  .footer {
+    gap: 12px !important;
+    align-items: flex-start !important;
+  }
+
+  p {
+    font-size: 13px !important;
+    line-height: 18px !important;
+  }
 }

@@ -23,7 +23,7 @@ import { registryAddress } from '../utils/constants';
 import './main.css';
 
 export function Main() {
-  const [activeTab, setActiveTab] = useState<string>('withdraw');
+  const [activeTab, setActiveTab] = useState<string>('send');
 
   const { chain } = useNetwork();
   const contractAddress = registryAddress[chain?.id || 250];
@@ -33,17 +33,19 @@ export function Main() {
       <div className="content">
         <div className="header-h">
           <div className="header-item">
-          <img className="logo logo-bg" src={LogoHover} alt="Hazed" />
-          <img
-            className="logo logo-default"
-            src={Logo}
-            alt="Hazed"
-            onClick={() => (document.location.href = '/')}
-          />
-        </div>
+            <img className="logo logo-bg" src={LogoHover} alt="Hazed" />
+            <img
+              className="logo logo-default"
+              src={Logo}
+              alt="Hazed"
+              onClick={() => (document.location.href = '/')}
+            />
+          </div>
+          <div className="header-item">
             <Connect />
 
             <Network />
+          </div>
         </div>
 
         <div className="promo large-block">
@@ -54,93 +56,85 @@ export function Main() {
 
           <div className="benefits">
             <div className="item">
-              <img src={Shield} alt="" />
+              <img src={Shield} alt="" width={24} />
               <p>
-                Make use of stealth addresses with <strong>no link</strong>
-                <br /> to your existing accounts.
+                Make use of stealth addresses with <strong>no&nbsp;link</strong>{' '}
+                to your existing accounts.
               </p>
             </div>
             <div className="item">
-              <img src={SendReceive} alt="" />
+              <img src={SendReceive} alt="" width={24} />
               <p>
                 Send and receive {chain?.nativeCurrency.symbol || 'FTM'}{' '}
-                <strong>privately</strong>
-                <br /> as well as tokens & NFTs <i>(coming soon)</i>
+                <strong>privately</strong> as well as tokens & NFTs{' '}
+                <i>(soon)</i>
               </p>
             </div>
           </div>
         </div>
-        <div className="main">
-          <div className="main-content">
-            <AddressProvider>
-              <HazedID />
 
-              <div className="large-block">
-                <div className="nav-tabs">
-                  <div
-                    className={activeTab === 'send' ? 'tab active' : 'tab'}
-                    onClick={() => setActiveTab('send')}
-                  >
-                    <h2>
-                      <FontAwesomeIcon icon={faArrowRight} />
-                      &nbsp; Send
-                    </h2>
-                    <span className="super">
-                      {chain?.nativeCurrency.symbol || 'FTM'}
-                    </span>
-                  </div>
-                  <div
-                    className={activeTab === 'withdraw' ? 'tab active' : 'tab'}
-                    onClick={() => setActiveTab('withdraw')}
-                  >
-                    <h2>
-                      <FontAwesomeIcon
-                        icon={faArrowTurnDown}
-                        flip="horizontal"
-                      />
-                      &nbsp; Receive
-                    </h2>
-                    <span className="super">
-                      {chain?.nativeCurrency.symbol || 'FTM'}
-                    </span>
-                  </div>
-                  <div className="tab disabled" title="Soon!">
-                    <h2>
-                      <FontAwesomeIcon icon={faArrowRight} />
-                      &nbsp; Send
-                    </h2>
-                    <span className="super">TOKEN</span>
-                  </div>
-                  <div className="tab disabled" title="Soon!">
-                    <h2>
-                      <FontAwesomeIcon
-                        icon={faArrowTurnDown}
-                        flip="horizontal"
-                      />
-                      &nbsp; Receive
-                    </h2>
-                    <span className="super">TOKEN</span>
-                  </div>
-                </div>
+        <AddressProvider>
+          <HazedID />
 
-                <div
-                  className="pane"
-                  style={{ display: activeTab === 'send' ? 'block' : 'none' }}
-                >
-                  <Send />
-                </div>
-                <div
-                  className="pane"
-                  style={{
-                    display: activeTab === 'withdraw' ? 'block' : 'none',
-                  }}
-                >
-                  <Withdraw />
-                </div>
+          <div className="large-block">
+            <div className="nav-tabs">
+              <div
+                className={activeTab === 'send' ? 'tab active' : 'tab'}
+                onClick={() => setActiveTab('send')}
+              >
+                <h2>
+                  <FontAwesomeIcon icon={faArrowRight} />
+                  &nbsp; Send
+                </h2>
+                <span className="super">
+                  {chain?.nativeCurrency.symbol || 'FTM'}
+                </span>
               </div>
-            </AddressProvider>
+              <div
+                className={activeTab === 'withdraw' ? 'tab active' : 'tab'}
+                onClick={() => setActiveTab('withdraw')}
+              >
+                <h2>
+                  <FontAwesomeIcon icon={faArrowTurnDown} flip="horizontal" />
+                  &nbsp; Receive
+                </h2>
+                <span className="super">
+                  {chain?.nativeCurrency.symbol || 'FTM'}
+                </span>
+              </div>
+              <div className="tab disabled" title="Soon!">
+                <h2>
+                  <FontAwesomeIcon icon={faArrowRight} />
+                  &nbsp; Send
+                </h2>
+                <span className="super">TOKEN</span>
+              </div>
+              <div className="tab disabled" title="Soon!">
+                <h2>
+                  <FontAwesomeIcon icon={faArrowTurnDown} flip="horizontal" />
+                  &nbsp; Receive
+                </h2>
+                <span className="super">TOKEN</span>
+              </div>
+            </div>
+
+            <div
+              className="pane"
+              style={{ display: activeTab === 'send' ? 'block' : 'none' }}
+            >
+              <Send />
+            </div>
+            <div
+              className="pane"
+              style={{
+                display: activeTab === 'withdraw' ? 'block' : 'none',
+              }}
+            >
+              <Withdraw />
+            </div>
           </div>
-        </div>
+        </AddressProvider>
+
         <div className="footer">
           <a
             href="https://vitalik.eth.limo/general/2023/01/20/stealth.html"
@@ -168,7 +162,12 @@ export function Main() {
               />
             </span>
           </a>
-          <a href="https://github.com/vden/hazed" style={{ flexGrow: 1 }} target="_blank" rel="noreferrer">
+          <a
+            href="https://github.com/vden/hazed"
+            style={{ flexGrow: 1 }}
+            target="_blank"
+            rel="noreferrer"
+          >
             <span>
               Github &nbsp;
               <FontAwesomeIcon icon={faGithub} />

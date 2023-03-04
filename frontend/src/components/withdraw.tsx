@@ -5,7 +5,8 @@ import './panes.css';
 import { StaticJsonRpcProvider } from '@ethersproject/providers';
 import {
   faArrowRight,
-  faArrowTurnDown, faCheckCircle,
+  faArrowTurnDown,
+  faCheckCircle,
   faCopy,
   faLink
 } from '@fortawesome/free-solid-svg-icons';
@@ -232,7 +233,7 @@ export function Withdraw() {
         from: addr,
         type: 1,
         value: originalBalance.sub(fee),
-        gasPrice: gasPrice
+        gasPrice: gasPrice,
       };
 
       console.log(
@@ -264,7 +265,11 @@ export function Withdraw() {
     return (
       <div className="lane">
         <p>
-          <strong>
+          <strong
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+            }}
+          >
             Connect wallet <FontAwesomeIcon icon={faLink} />
           </strong>{' '}
           to proceed.
@@ -328,19 +333,20 @@ export function Withdraw() {
                 Withdraw {formatEther(active.balance || '0')}{' '}
                 {chain?.nativeCurrency.symbol}
               </h2>
+
+              <button
+                className="hbutton hbutton-lnk"
+                style={{
+                  paddingLeft: 0,
+                }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setModalVisible(false);
+                }}
+              >
+                back to list
+              </button>
             </div>
-            <button
-              className="hbutton hbutton-lnk"
-              style={{
-                paddingLeft: 0,
-              }}
-              onClick={(e) => {
-                e.preventDefault();
-                setModalVisible(false);
-              }}
-            >
-              back to list
-            </button>
           </div>
           <div className="lane" style={{ marginTop: '0.5rem' }}>
             <form
@@ -388,42 +394,48 @@ export function Withdraw() {
 
           {!!spendingKey && (
             <div className="lane" style={{ marginTop: '1.25rem' }}>
-              <button
-                className="hbutton"
-                disabled={isSending || !targetAddr || !isAddressValid}
-                onClick={() =>
-                  withdraw(
-                    active.x,
-                    active.y,
-                    active.token,
-                    active.addr as `0x${string}`,
-                    targetAddr as `0x${string}`
-                  )
-                }
-              >
-                <span>
-                  <FontAwesomeIcon icon={faArrowTurnDown} flip="horizontal" />
-                  &nbsp;
-                  {isSending ? 'Sending...' : 'Withdraw'}
-                </span>
-              </button>
-              <button
-                className="hbutton hbutton-lnk"
-                onClick={() => {
-                  const key = buildPrivateKey(active.x, active.y, spendingKey);
-                  copyTextToClipboard(key.toString(16, 32));
-                  setIsCopied(true);
-                  setTimeout(() => {
-                    setIsCopied(false);
-                  }, 1500);
-                }}
-              >
-                <span>
-                  <FontAwesomeIcon icon={isCopied ? faCheckCircle : faCopy} />{' '}
-                  &nbsp;
-                  {isCopied ? 'Copied!' : 'Copy private key'}
-                </span>
-              </button>
+              <div className="header-item">
+                <button
+                  className="hbutton"
+                  disabled={isSending || !targetAddr || !isAddressValid}
+                  onClick={() =>
+                    withdraw(
+                      active.x,
+                      active.y,
+                      active.token,
+                      active.addr as `0x${string}`,
+                      targetAddr as `0x${string}`
+                    )
+                  }
+                >
+                  <span>
+                    <FontAwesomeIcon icon={faArrowTurnDown} flip="horizontal" />
+                    &nbsp;
+                    {isSending ? 'Sending...' : 'Withdraw'}
+                  </span>
+                </button>
+                <button
+                  className="hbutton hbutton-lnk"
+                  onClick={() => {
+                    const key = buildPrivateKey(
+                      active.x,
+                      active.y,
+                      spendingKey
+                    );
+                    copyTextToClipboard(key.toString(16, 32));
+                    setIsCopied(true);
+                    setTimeout(() => {
+                      setIsCopied(false);
+                    }, 1500);
+                  }}
+                >
+                  <span>
+                    <FontAwesomeIcon icon={isCopied ? faCheckCircle : faCopy} />{' '}
+                    &nbsp;
+                    {isCopied ? 'Copied!' : 'Copy private key'}
+                  </span>
+                </button>
+              </div>
             </div>
           )}
           {(!!withdrawError || !!withdrawSuccess) && (

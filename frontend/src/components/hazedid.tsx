@@ -3,12 +3,9 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import './hazed-pane.css';
 
 import { faCopy, faSave } from '@fortawesome/free-regular-svg-icons';
-import {
-  faCheckCircle, faRotate
-} from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faRotate } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { base58 } from 'ethers/lib/utils.js';
-import QRCode from 'react-qr-code';
 import { copyTextToClipboard } from '../utils/clipboard';
 import { calculateCrc } from '../utils/crc16';
 import { downloadTxtFile } from '../utils/download';
@@ -122,12 +119,12 @@ export function HazedID() {
     [metaAddr]
   );
 
-  const qrCode = metaAddr && (
-    <QRCode size={224} value={metaAddr} viewBox={`0 0 256 256`} />
-  );
+  // const qrCode = metaAddr && (
+  //   <QRCode size={224} value={metaAddr} viewBox={`0 0 256 256`} />
+  // );
 
   return (
-    <div className="hazed-pane">
+    <div className="large-block hazed-pane ">
       <div className="hazed-pane-header">
         {opened ? (
           <h1>Your Hazed ID</h1>
@@ -137,42 +134,40 @@ export function HazedID() {
               <p className="label" style={{ textTransform: 'uppercase' }}>
                 Your Hazed ID:
               </p>
-              <p
-                className="label"
-                style={{ fontSize: '110%', lineHeight: '140%' }}
-              >
-                {metaAddr}
-              </p>
+              <p className="label hazed-id-contracted">{metaAddr}</p>
             </div>
 
-            <button
-              title="Copy link"
-              className="hbutton hbutton-lnk"
-              onClick={handleCopy}
-            >
-              <span>
-                <FontAwesomeIcon icon={copied ? faCheckCircle : faCopy} /> COPY
-              </span>
-            </button>
-
-            {spendingKey && (
+            <div className="header-item">
               <button
-                className={keySaved ? 'hbutton hbutton-lnk' : 'hbutton'}
-                title="Save key"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  downloadTxtFile(
-                    spendingKey.getPrivate().toString(16),
-                    `Hazed_${metaAddr}.txt`
-                  )();
-                  setKeySaved(true);
-                }}
+                title="Copy link"
+                className="hbutton hbutton-lnk"
+                onClick={handleCopy}
               >
                 <span>
-                  <FontAwesomeIcon icon={faSave} /> SAVE KEY
+                  <FontAwesomeIcon icon={copied ? faCheckCircle : faCopy} />{' '}
+                  COPY
                 </span>
               </button>
-            )}
+
+              {spendingKey && (
+                <button
+                  className={keySaved ? 'hbutton hbutton-lnk' : 'hbutton'}
+                  title="Save key"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    downloadTxtFile(
+                      spendingKey.getPrivate().toString(16),
+                      `Hazed_${metaAddr}.txt`
+                    )();
+                    setKeySaved(true);
+                  }}
+                >
+                  <span>
+                    <FontAwesomeIcon icon={faSave} /> SAVE KEY
+                  </span>
+                </button>
+              )}
+            </div>
           </div>
         )}
 
@@ -187,82 +182,78 @@ export function HazedID() {
         className="hazed-pane-body"
         style={{ display: opened ? 'block' : 'none' }}
       >
-        <div>
-          <p className="block">Share the Hazed ID to receive funds.</p>
-        </div>
+        <p className="block">Share the Hazed ID to receive funds.</p>
         <div className="hazed-pane-header buttons">
           <div className="block-wide">
             <p className="label" style={{ textTransform: 'uppercase' }}>
               Hazed ID:
             </p>
-            <p
-              className="label"
-              style={{ fontSize: '125%', lineHeight: '125%' }}
-            >
-              {metaAddr}
-            </p>
+            <p className="label hazed-id">{metaAddr}</p>
           </div>
-          &nbsp;
-          <button
-            className="hbutton hbutton-lnk"
-            title="Copy link"
-            onClick={handleCopy}
-          >
-            <span>
-              <FontAwesomeIcon icon={copied ? faCheckCircle : faCopy} /> COPY
-            </span>
-          </button>
-          <button
-            className="hbutton hbutton-lnk"
-            title="Generate new"
-            onClick={generateNewKey}
-          >
-            <span>
-              <FontAwesomeIcon icon={faRotate} /> Generate New
-            </span>
-          </button>
+          <div className="header-item">
+            <button
+              className="hbutton hbutton-lnk"
+              title="Copy link"
+              onClick={handleCopy}
+            >
+              <span>
+                <FontAwesomeIcon icon={copied ? faCheckCircle : faCopy} /> COPY
+              </span>
+            </button>
+            <button
+              className="hbutton hbutton-lnk"
+              title="Generate new"
+              onClick={generateNewKey}
+            >
+              <span>
+                <FontAwesomeIcon icon={faRotate} /> Generate New
+              </span>
+            </button>
+          </div>
         </div>
 
         <div className="line"></div>
 
-        <div className="hazed-pane-header block">
+        <div className="hazed-pane-header">
           <div className="block-wide">
-            <p style={{ width: '85%' }}>
+            <p className="message">
               Once you shared your ID, you should <strong>save its key</strong>{' '}
               to be able to withdraw funds from it. <strong>Never</strong> share
               your key, only ID.
             </p>
           </div>
 
-          <FileUploader
-            preLoad={() => {
-              setLoadError(false);
-              setLoadSuccess(false);
-            }}
-            handleFile={handleFile}
-          />
-
-          {spendingKey && (
-            <button
-              className={keySaved ? 'hbutton hbutton-lnk' : 'hbutton'}
-              onClick={() => {
-                downloadTxtFile(
-                  spendingKey.getPrivate().toString(16),
-                  `Hazed_${metaAddr}.txt`
-                )();
-                setKeySaved(true);
+          <div className="header-item">
+            <FileUploader
+              preLoad={() => {
+                setLoadError(false);
+                setLoadSuccess(false);
               }}
-              disabled={!spendingKey}
-            >
-              <span>
-                <FontAwesomeIcon icon={faSave} /> Save key
-              </span>
-            </button>
-          )}
+              handleFile={handleFile}
+            />
+
+            {spendingKey && (
+              <button
+                className={keySaved ? 'hbutton hbutton-lnk' : 'hbutton'}
+                onClick={() => {
+                  downloadTxtFile(
+                    spendingKey.getPrivate().toString(16),
+                    `Hazed_${metaAddr}.txt`
+                  )();
+                  setKeySaved(true);
+                }}
+                disabled={!spendingKey}
+              >
+                <span>
+                  <FontAwesomeIcon icon={faSave} /> Save key
+                </span>
+              </button>
+            )}
+          </div>
         </div>
 
         <div
-          className="hazed-pane-header block"
+          className="hazed-pane-header block message"
           style={{
             width: '90%',
             display: loadSuccess || loadError ? 'block' : 'none',

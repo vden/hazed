@@ -11,10 +11,14 @@
 
   /* gradient-base */
 
-  background: linear-gradient(90deg, rgba(25, 27, 39, 0) 0%, #191b27 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(25, 27, 39, 0) 0%,
+    #191b27 100%
+  ) !important;
   /* shadow-right */
 
-  filter: drop-shadow(16px 0px 16px rgba(0, 0, 0, 0.24));
+  filter: drop-shadow(16px 0px 16px rgba(0, 0, 0, 0.24)) !important;
   border-radius: 8px;
 
   /* Inside auto layout */
@@ -33,9 +37,11 @@
   padding: 0px;
 
   width: 896px;
-  height: 48px;
+  min-height: 48px;
 
   /* Inside auto layout */
+
+  gap: 12px;
 
   flex: none;
   order: 0;
@@ -71,7 +77,7 @@
   padding: 4px 0px 4px 16px;
 
   width: 518px;
-  height: 48px;
+  min-height: 48px;
 
   /* accent */
 
@@ -121,11 +127,25 @@
   color: #e8e8e9;
 }
 
+.label.hazed-id {
+  font-size: 125%;
+  line-height: 125%;
+}
+
+.label.hazed-id-contracted {
+  font-size: 110%;
+  line-height: 140%;
+}
+
 .hazed-pane-body .block {
   /* primary */
 
   color: #e8e8e9;
   margin: 0 0 1rem 0;
+}
+
+.hazed-pane-body .block.message {
+  margin-top: 1.5rem;
 }
 
 .hazed-pane .line {
@@ -142,4 +162,51 @@
 .hazed-pane .error-text {
   color: #ff4f4f;
   border-color: #ff4f4f;
+}
+
+@media only screen and (max-width: 420px) {
+  .hazed-pane {
+    padding: 16px !important;
+    margin-right: -16px !important;
+  }
+
+  .hazed-pane-header {
+    width: 348px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .hazed-pane button:first-child {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  p.label.hazed-id {
+    font-size: 110% !important;
+    line-height: 125% !important;
+  }
+
+  .block-wide {
+    width: 348px !important;
+  }
+
+  p.label.hazed-id-contracted,
+  .label.hazed-id {
+    width: 300px !important;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    text-overflow: ellipsis;
+    font-size: 110% !important;
+    line-height: 125% !important;
+  }
+
+  .hazed-pane-header .arrow {
+    margin-right: -16px;
+  }
+
+  .hazed-pane .line {
+    width: auto !important;
+    margin: 12px 0 24px 0 !important;
+  }
 }

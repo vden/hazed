@@ -3,9 +3,7 @@ import './panes.css';
 
 import { curve, ec as EC } from 'elliptic';
 
-import {
-  faArrowRight, faLink
-} from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faLink } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { BigNumber, ethers } from 'ethers';
 import { base58, getAddress, keccak256, parseEther } from 'ethers/lib/utils.js';
@@ -15,7 +13,7 @@ import {
   useContractWrite,
   useNetwork,
   usePrepareContractWrite,
-  useWaitForTransaction
+  useWaitForTransaction,
 } from 'wagmi';
 import { default as REGISTRY_ABI } from '../contracts/Registry.sol/Registry.json';
 import { registryAddress } from '../utils/constants';
@@ -181,7 +179,7 @@ export function Send() {
   }, [amount, balance]);
 
   return (
-    <div>
+    <div style={{ paddingTop: '1rem' }}>
       <p>
         Funds will be sent to the temporary stealth blockchain account,
         controlled by the owner of Hazed ID.
@@ -209,7 +207,11 @@ export function Send() {
 
       {!isConnected && (
         <p style={{ marginTop: '1.75rem' }}>
-          <strong>
+          <strong
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+            }}
+          >
             Connect wallet <FontAwesomeIcon icon={faLink} />
           </strong>{' '}
           to proceed.
@@ -224,35 +226,34 @@ export function Send() {
                 return false;
               }}
             >
-              <div
-                className="input-container"
-                style={{ width: '30%', flexGrow: 1 }}
-              >
-                <input
-                  type="text"
-                  value={amount}
-                  autoComplete="off"
-                  id="amount"
-                  disabled={isLoading}
-                  style={{ textAlign: 'left' }}
-                  className={amountError ? 'error-input' : ''}
-                  placeholder="0.00"
-                  onChange={handleAmountInput}
-                />
+              <div className="header-item">
+                <div className="input-container small">
+                  <input
+                    type="text"
+                    value={amount}
+                    autoComplete="off"
+                    id="amount"
+                    disabled={isLoading}
+                    style={{ textAlign: 'left' }}
+                    className={amountError ? 'error-input' : ''}
+                    placeholder="0.00"
+                    onChange={handleAmountInput}
+                  />
 
-                <label htmlFor="amount">
-                  Amount ({chain?.nativeCurrency.symbol})
-                </label>
-              </div>
+                  <label htmlFor="amount">
+                    Amount ({chain?.nativeCurrency.symbol})
+                  </label>
+                </div>
 
-              <div className="input-container hint">
-                <input
-                  value={`${formatEtherTruncated(balance.value)} ${
-                    chain?.nativeCurrency.symbol
-                  }`}
-                  disabled
-                />
-                <label>Available</label>
+                <div className="input-container hint">
+                  <input
+                    value={`${formatEtherTruncated(balance.value)} ${
+                      chain?.nativeCurrency.symbol
+                    }`}
+                    disabled
+                  />
+                  <label>Available</label>
+                </div>
               </div>
 
               <button
