@@ -8,7 +8,7 @@ Currently, the platform is available on Fantom.
 
 ## How does it work
 
-Hazed is heavily inspired by [Vitalik's recent article on stealth addresses](https://vitalik.eth.limo/general/2023/01/20/stealth.html). 
+Hazed is heavily inspired by [Vitalik's recent article on stealth addresses](https://vitalik.eth.limo/general/2023/01/20/stealth.html).
 
 Here is an excerpt from the article explaining cryptography under the hood:
 
@@ -22,6 +22,10 @@ Here is an excerpt from the article explaining cryptography under the hood:
 > 8. For each ephemeral public key, Bob attempts to combine it with his root spending key to generate a stealth address, and checks if there are any assets in that address. If there are, Bob computes the spending key for that address and remembers it.
 
 Hazed uses its own Hazed IDs instead of adding anything to the ENS. It also implements a few improvements to speed up ephemeral keys check.
+
+Registry's `publishAndSend` method accepts ephemeral public key (`x` and `y`), first byte of the shared secret and token address (0x0 for native token). It stores the data into an array and sends coins to the calculated stealth address. Neither target stealth address nor amount are stored.
+
+Hazed ID is base58-encoded public key with the prefix 0x48 ('H') and 2-bytes suffix of CRC16 checksum.
 
 ## Future
 
