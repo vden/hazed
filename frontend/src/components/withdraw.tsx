@@ -86,7 +86,7 @@ export function Withdraw() {
     return () => {
       clearInterval(handler);
     };
-  }, [isConnected, chain]);
+  }, [isConnected, chain, refetchKeysCount]);
 
   useEffect(() => {
     if (!keysCount || !spendingKey || !isConnected) return;

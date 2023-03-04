@@ -13,7 +13,7 @@ import {
   useContractWrite,
   useNetwork,
   usePrepareContractWrite,
-  useWaitForTransaction
+  useWaitForTransaction,
 } from 'wagmi';
 import { default as REGISTRY_ABI } from '../contracts/Registry.sol/Registry.json';
 import { registryAddress } from '../utils/constants';

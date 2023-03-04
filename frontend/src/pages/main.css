@@ -100,7 +100,7 @@ p {
   height: 32px;
 
   position: absolute;
-  left: 0;
+  left: 0px;
   top: 0;
 
   cursor: pointer;
@@ -110,6 +110,10 @@ p {
   order: 0;
   flex-grow: 0;
   transition: opacity 1s;
+}
+
+.header-h .logo-default {
+  left: -1px;
 }
 
 .header-item {
@@ -550,7 +554,6 @@ p {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 960px) {
-
   .content {
     width: 768px;
   }
@@ -565,6 +568,10 @@ p {
 
   .header-h .logo {
     left: 4px;
+  }
+
+  .header-h .logo-default {
+    left: 3px;
   }
 
   .large-block {
