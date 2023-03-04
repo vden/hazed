@@ -360,7 +360,9 @@ p {
 }
 
 .nav-tabs .tab.disabled h2,
-.nav-tabs .tab.disabled .super {
+.nav-tabs .tab.disabled .super,
+.nav-tabs .tab.disabled:hover h2,
+.nav-tabs .tab.disabled:hover .super {
   color: rgba(232, 232, 233, 0.2) !important;
 }
 
