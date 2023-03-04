@@ -1098,13 +1098,6 @@
     stream-browserify "^3.0.0"
     util "^0.12.4"
 
-"@coreui/coreui@^4.2.6":
-  version "4.2.6"
-  resolved "https://registry.yarnpkg.com/@coreui/coreui/-/coreui-4.2.6.tgz#8ae8aa4c834552328c5748385be5bc33df86aab7"
-  integrity sha512-h9j1BVnaDi9vSr1t0H8NL3hlDD4lU9kIdGLXn7g9k5iaFq5EDlRDcSBDer6lR2O4sIEl7W7YqTlevLxFC+1cIA==
-  dependencies:
-    postcss-combine-duplicated-selectors "^10.0.3"
-
 "@coreui/react@^4.5.2":
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/@coreui/react/-/react-4.5.2.tgz#b103326fff1bb0a8fe15dc72fa664da344f55485"
@@ -9124,13 +9117,6 @@ postcss-colormin@^5.3.0:
     caniuse-api "^3.0.0"
     colord "^2.9.1"
     postcss-value-parser "^4.2.0"
-
-postcss-combine-duplicated-selectors@^10.0.3:
-  version "10.0.3"
-  resolved "https://registry.yarnpkg.com/postcss-combine-duplicated-selectors/-/postcss-combine-duplicated-selectors-10.0.3.tgz#71e8b6783e99cd560cf08ba7b896ad0db318c11c"
-  integrity sha512-IP0BmwFloCskv7DV7xqvzDXqMHpwdczJa6ZvIW8abgHdcIHs9mCJX2ltFhu3EwA51ozp13DByng30+Ke+eIExA==
-  dependencies:
-    postcss-selector-parser "^6.0.4"
 
 postcss-convert-values@^5.1.3:
   version "5.1.3"
