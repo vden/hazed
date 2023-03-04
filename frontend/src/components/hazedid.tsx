@@ -127,9 +127,17 @@ export function HazedID() {
     <div className="large-block hazed-pane ">
       <div className="hazed-pane-header">
         {opened ? (
-          <h1>Your Hazed ID</h1>
+          <div className="hazed-pane-header">
+          <div className="header-item"><h1>Your Hazed ID</h1></div>
+           <button
+            className={opened ? 'arrow' : 'arrow arrow-down'}
+            onClick={() => setOpened(!opened)}
+          >
+            <img src={chevronUp} alt="" width={24} />
+          </button>
+          </div>
         ) : (
-          <div className="hazed-pane-header" style={{ width: '90%' }}>
+          <div className="hazed-pane-header">
             <div className="block-wide">
               <p className="label" style={{ textTransform: 'uppercase' }}>
                 Your Hazed ID:
@@ -167,16 +175,16 @@ export function HazedID() {
                   </span>
                 </button>
               )}
-            </div>
+
+                      <button
+            className={opened ? 'arrow' : 'arrow arrow-down'}
+            onClick={() => setOpened(!opened)}
+          >
+            <img src={chevronUp} alt="" width={24} />
+          </button>
+          </div>
           </div>
         )}
-
-        <button
-          className={opened ? 'arrow' : 'arrow arrow-down'}
-          onClick={() => setOpened(!opened)}
-        >
-          <img src={chevronUp} alt="" />
-        </button>
       </div>
       <div
         className="hazed-pane-body"

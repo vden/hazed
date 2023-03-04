@@ -185,36 +185,61 @@
 }
 
 .pane .input-container.small {
-  width: 280px !important;
+  width: 280px;
   flex-grow: 1;
   margin-right: 24px;
 }
 
-@media only screen and (max-width: 420px) {
-  .lane {
-    width: 360px !important;
-    flex-direction: column !important;
-    gap: 16px !important;
-    margin-top: 1rem !important;
+@media only screen and (max-width: 767px) {
+  .pane .lane {
+    width: 360px;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 1rem;
   }
 
   .pane .input-container {
-    width: 348px !important;
+    width: 348px;
   }
 
   .pane .input-container.small {
-    width: 160px !important;
-    margin-right: 12px !important;
+    width: 160px;
+    margin-right: 12px;
   }
   .pane .input-container.hint {
-    width: 160px !important;
+    width: 160px;
   }
 
   .pane .hbutton.hbutton-lnk:first-child {
-    padding-left: 0 !important;
+    padding-left: 0;
   }
 
   .modal-window {
     height: 36px;
+  }
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+  .pane .lane {
+    width: 760px;
+    gap: 16px;
+    margin-top: 1rem;
+  }
+
+  .pane .input-container {
+    width: 760px;
+  }
+
+  .pane .input-container.small {
+    width: 260px;
+    margin-right: 12px;
+  }
+  .pane .input-container.hint {
+    width: 260px;
+  }
+
+  .pane .hbutton.hbutton-lnk:first-child {
+    padding-left: 0;
   }
 }
