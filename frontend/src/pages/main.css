@@ -223,9 +223,10 @@ p {
   flex-direction: row;
   align-items: center;
   padding: 0px;
+  padding-right: 40px;
   gap: 16px;
 
-  width: 382px;
+  width: 422px;
   height: 48px;
 
   border-radius: 8px;
@@ -514,6 +515,7 @@ p {
 
   .promo .benefits .item {
     width: 348px;
+    padding: 0px;
   }
 
   h1 {
@@ -589,6 +591,7 @@ p {
 
   .promo .benefits .item {
     width: 328px;
+    padding: 0px;
   }
 
   .footer {
