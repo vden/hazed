@@ -617,7 +617,7 @@ p {
   }
 
   .footer {
-    gap: 12px;
+    gap: 32px;
     align-items: flex-start;
   }
 }

@@ -1,4 +1,4 @@
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import {
   faArrowRight,
   faArrowTurnDown
@@ -147,6 +147,11 @@ export function Main() {
                 icon={faArrowRight}
                 transform={{ rotate: -45 }}
               />
+            </span>
+          </a>
+          <a href="https://www.youtube.com/watch?v=38bplxh9nQ0" rel="noreferrer" target="_blank">
+            <span>
+              Demo video &nbsp;<FontAwesomeIcon icon={faYoutube} />
             </span>
           </a>
           <a
