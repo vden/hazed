@@ -278,7 +278,7 @@ export function Withdraw() {
   } else {
     return (
       <div>
-        {keyAddrs.length === 0 && (
+        {keyAddrs.length === 0 && !modalVisible && (
           <div className="lane" style={{ marginTop: '1rem' }}>
             <p className="message">Nothing to withdraw yet.</p>
           </div>
@@ -437,7 +437,7 @@ export function Withdraw() {
               </div>
             </div>
           )}
-          {(!!withdrawError || !!withdrawSuccess) && (
+          {(!!withdrawError || !!withdrawSuccess || !!txPending) && (
             <div className="lane">
               {txPending !== '' && (
                 <p className="message">
