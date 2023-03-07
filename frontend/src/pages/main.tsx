@@ -1,4 +1,4 @@
-import { faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faDiscord, faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import {
   faArrowRight,
   faArrowTurnDown
@@ -149,9 +149,14 @@ export function Main() {
               />
             </span>
           </a>
-          <a href="https://www.youtube.com/watch?v=38bplxh9nQ0" rel="noreferrer" target="_blank">
+          <a
+            href="https://www.youtube.com/watch?v=38bplxh9nQ0"
+            rel="noreferrer"
+            target="_blank"
+          >
             <span>
-              Demo video &nbsp;<FontAwesomeIcon icon={faYoutube} />
+              Demo video &nbsp;
+              <FontAwesomeIcon icon={faYoutube} />
             </span>
           </a>
           <a
@@ -169,13 +174,23 @@ export function Main() {
           </a>
           <a
             href="https://github.com/vden/hazed"
-            style={{ flexGrow: 1 }}
             target="_blank"
             rel="noreferrer"
           >
             <span>
               Github &nbsp;
               <FontAwesomeIcon icon={faGithub} />
+            </span>
+          </a>
+          <a
+            href="https://discord.gg/6cHAJqkC56"
+            style={{ flexGrow: 1 }}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span>
+              Discord &nbsp;
+              <FontAwesomeIcon icon={faDiscord} />
             </span>
           </a>
           <span className="version">v1.0.0</span>
